@@ -1,0 +1,59 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#121c18"><title>ASYQ ARENA — асық ату в браузере</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="hubBar" class="hubBar">
+  <div class="hubTabs">
+    <button data-hub="game" class="hubTab active" data-i18n="tabGame">🎮 Игра</button>
+    <button data-hub="editor" class="hubTab" data-i18n="tabEditor">🛠 Редактор</button>
+    <button data-hub="shop" class="hubTab" data-i18n="tabShop">🛍 Магазин</button>
+    <button data-hub="rank" class="hubTab" data-i18n="tabRank">🏆 Рейтинг</button>
+  </div>
+  <div class="coinPill">🪙 <span id="coinBalance">1200</span></div>
+</div>
+<div id="hubPanel" class="hubPanel">
+ <button id="hubClose" class="hubClose">×</button>
+ <div id="hubContent"></div>
+</div>
+
+<div id="app"><header><button class="logo" id="logo">ASYQ <i>ARENA</i></button><nav><button data-nav="start">Играть</button><button data-nav="challenges">Испытания</button><button data-nav="collection">Коллекция</button><button data-nav="profile">Профиль</button><button id="rulesBtn">Правила</button></nav><div class="head-actions"><button id="authBtn">Войти</button><div class="langPicker"><button id="langBtn" type="button">RU ▾</button>
+    <div id="langMenu" class="langMenu">
+      <button type="button" data-language="ru">RU</button>
+      <button type="button" data-language="kz">KZ</button>
+      <button type="button" data-language="en">EN</button>
+    </div></div><button id="soundBtn">🔊</button></div></header>
+<main>
+<section id="start" class="screen active"><div class="hero"><div class="eyebrow">ҚАЗАҚТЫҢ ҰЛТТЫҚ ОЙЫНЫ • DIGITAL EDITION</div><h1>ТРАДИЦИЯ.<br><span>ТОЧНОСТЬ.</span> АЗАРТ.</h1><p>Современная 2D-версия асық ату: почувствуй бросок сақа, выбивай асыки и стань мергеном.</p><div class="startbox"><input id="nick" maxlength="16" placeholder="Твой никнейм"><button id="playBtn" class="primary">НАЧАТЬ МАТЧ <b>→</b></button><button id="learnBtn" class="learnbtn">? КАК ИГРАТЬ</button></div><div class="facts"><div><b>15</b><span>асыков на линии</span></div><div><b>8</b><span>до победы</span></div><div><b>6 м</b><span>стартовая дистанция</span></div></div></div><div class="hero-art"><div class="sun"></div><div class="ring"><span class="bone b1"></span><span class="bone b2"></span><span class="bone b3"></span><span class="bone b4"></span><span class="bone b5"></span></div><div class="tag">НАВЕДИ • ПОТЯНИ • ОТПУСТИ</div></div></section>
+<section id="game" class="screen"><div class="matchbar"><div><small>СПОРТИВНЫЙ МАТЧ</small><b id="playerName">Игрок</b></div><div class="target"><span>ЦЕЛЬ</span><b><i id="knockedHud">0</i> / 8</b></div><div class="target"><span>БРОСКИ</span><b><i id="throwsHud">0</i> / 7</b></div><div><small>ДИСТАНЦИЯ</small><b id="distanceLabel">6 М</b></div></div><div class="gamewrap"><canvas id="canvas" width="1100" height="650"></canvas><div class="game-bottom"><div><strong id="turnLabel">ТВОЙ БРОСОК</strong><span id="hint">Зажми сақа и потяни назад</span></div><div class="shotControls">
+  <div class="aimActions">
+    <button id="confirmAim" class="confirmAim">ПОДТВЕРДИТЬ</button>
+    <button id="hitBtn" class="hitBtn" disabled>УДАР</button>
+  </div>
+  <div id="powerMeter" class="timingMeter" aria-label="Шкала силы">
+    <div class="powerSegments">
+      <i class="p25" style="flex:1.35">25</i><i class="p50" style="flex:1.25">50</i><i class="p75" style="flex:1">75</i><i class="p100" style="flex:.82">100</i><i class="p150" style="flex:.34">150</i><i class="p100" style="flex:.82">100</i><i class="p75" style="flex:1">75</i><i class="p50" style="flex:1.25">50</i><i class="p25" style="flex:1.35">25</i>
+    </div>
+    <b id="powerMarker"></b>
+  </div>
+  <span id="powerReadout">Выбери направление</span>
+</div><button id="restart">↻ Заново</button></div></div><div id="trainingCoach" class="trainingCoach">
+<div class="trainingBadge">ТРЕНИРОВКА <span id="trainingCount">1/4</span></div>
+<b id="trainingTitle">НАВЕДИ СТРЕЛКУ</b><p id="trainingText">Мышью или пальцем направь стрелку на любой обычный асық.</p>
+<div class="trainingProgress"><i class="on"></i><i></i><i></i><i></i></div>
+</div></section>
+<section id="result" class="screen"><div class="resultCard"><div class="trophy">✦</div><small>МАТЧ ЗАВЕРШЁН</small><h2 id="resultTitle">МЕРГЕН!</h2><p id="resultText"></p><div id="stars" class="stars">☆☆☆</div><div class="resultScore"><div><b id="finalKnocked">0</b><span>выбито</span></div><div><b id="finalThrows">0</b><span>бросков</span></div><div><b id="finalAccuracy">0%</b><span>точность</span></div><div><b id="finalCombo">0</b><span>лучшая серия</span></div></div><button id="again" class="primary">СЫГРАТЬ ЕЩЁ</button><button data-nav="challenges" class="secondary">ПОПРОБОВАТЬ ИСПЫТАНИЯ</button></div></section>
+<section id="profile" class="screen page"><div class="pagehead"><div><div class="eyebrow">ЛИЧНЫЙ ПРОГРЕСС</div><h2>ПРОФИЛЬ МЕРГЕНА</h2><p>Рекорды, история результатов и прогресс испытаний. После подключения Supabase данные синхронизируются между устройствами.</p></div><b id="syncBadge">LOCAL SAVE</b></div><div class="profilegrid"><article class="profilehero"><div class="avatar">A</div><div><small>ИГРОК</small><h3 id="profileName">Гость</h3><p id="profileLevel">Уровень 1 • Бастаушы</p></div><div class="xp"><span><i id="xpFill"></i></span><small id="xpText">0 / 300 XP</small></div></article><article class="stat"><small>ЛУЧШИЙ МАТЧ</small><b id="bestKnocked">0</b><span>асыков</span></article><article class="stat"><small>ЛУЧШАЯ ТОЧНОСТЬ</small><b id="bestAccuracy">0%</b><span>личный рекорд</span></article><article class="stat"><small>ИСПЫТАНИЯ</small><b id="challengeProgress">0/5</b><span>пройдено</span></article></div><div class="coach"><div><div class="eyebrow">ASYQ COACH</div><h3>Как улучшить следующий бросок</h3><p id="coachText">Сыграй первый матч — после него здесь появится персональная подсказка.</p></div><button data-nav="start">ТРЕНИРОВАТЬСЯ →</button></div><div class="history"><h3>ИСТОРИЯ РЕЗУЛЬТАТОВ</h3><div id="historyList" class="historylist"><p class="empty">Пока матчей нет.</p></div></div></section>
+<section id="challenges" class="screen page"><div class="pagehead"><div><div class="eyebrow">ASYQ LAB</div><h2>ИСПЫТАНИЯ МЕРГЕНА</h2><p>Авторский режим: короткие задачи на точность. Правила испытания не заменяют спортивный матч.</p></div><b>5 УРОВНЕЙ</b></div><div class="challengegrid five"><article><span>01 • ОБУЧЕНИЕ</span><h3>Алғашқы соққы</h3><p>Большая цель: выбей 1 асык. Игра покажет направление и силу.</p><button class="challengeBtn" data-ch="one">ИГРАТЬ</button></article><article><span>02 • ЛЕГКО</span><h3>Қос соққы</h3><p>Выбей минимум 2 асыка одним броском.</p><button class="challengeBtn" data-ch="double">ИГРАТЬ</button></article><article><span>03 • СРЕДНЕ</span><h3>Бүйір соққы</h3><p>Расстановка смещена: найди правильный угол и выбей 2.</p><button class="challengeBtn" data-ch="angle">ИГРАТЬ</button></article><article><span>04 • СЛОЖНО</span><h3>Мерген</h3><p>Узкая расстановка: выбей 3 асыка одним точным ударом.</p><button class="challengeBtn" data-ch="sniper">ИГРАТЬ</button></article><article class="premium"><span>05 • MASTER</span><h3>Дала шебері</h3><p>Выбей 4 асыка одним броском. Финальное испытание.</p><button class="challengeBtn" data-ch="master">ИГРАТЬ</button></article><article class="premium"><span>PREMIUM DEMO</span><h3>12 новых задач</h3><p>Дополнительные авторские испытания и оформление. Без бонусов к физике.</p><button id="premiumDemo">ПОСМОТРЕТЬ</button></article></div></section>
+<section id="collection" class="screen page"><div class="pagehead"><div><div class="eyebrow">FAIR PLAY STORE • DEMO</div><h2>КОЛЛЕКЦИЯ</h2><p>Монетизация только через внешний вид и дополнительный контент. Характеристики сақа одинаковы для всех.</p></div><b>NO PAY-TO-WIN</b></div><div class="shopgrid"><article class="skin selected" data-skin="classic"><div class="skinball classic"></div><h3>Классический сақа</h3><p>Базовый • бесплатно</p><button>ВЫБРАНО</button></article><article class="skin" data-skin="turquoise"><div class="skinball turquoise"></div><h3>Көк өрнек</h3><p>Косметика • 490 ₸ <em>DEMO</em></p><button>ПРИМЕРИТЬ</button></article><article class="skin" data-skin="gold"><div class="skinball gold"></div><h3>Алтын мұра</h3><p>Косметика • 790 ₸ <em>DEMO</em></p><button>ПРИМЕРИТЬ</button></article></div><div class="fair"><b>⚖ FAIR PLAY</b><span>Покупка не меняет массу, скорость, точность, физику или шанс победы. В этой конкурсной версии реальные платежи не подключены.</span></div></section>
+</main>
+<div id="modal" class="modal"><div class="modalbox"><button class="x" id="closeModal">×</button><div class="eyebrow">ПРАВИЛА</div><h2>КАК ИГРАТЬ В ASYQ ARENA</h2><div class="rulesgrid"><div><b>01</b><h3>Расстановка</h3><p>15 асыков стоят в положении «алшы» на центральной линии. В реальной спортивной игре линия — 115 см.</p></div><div><b>02</b><h3>Бросок</h3><p>Первый бросок выполняется с отметки 6 м. В браузере расстояние показано в масштабе.</p></div><div><b>03</b><h3>Выбивание</h3><p>Асык засчитывается, когда после удара полностью оказывается за внешней границей круга.</p></div><div><b>04</b><h3>Победа</h3><p>Цель спортивной встречи — первым выбить 8 асыков. После успешного первого выбивания доступна сокращённая дистанция от края круга.</p></div></div><div class="adapt"><b>ЦИФРОВАЯ АДАПТАЦИЯ</b><p>Управление мышью/касанием, 2D-физика, визуальная траектория, одиночный тренировочный матч и авторские испытания. Это упрощает управление, но сохраняет основную цель асық ату.</p></div></div></div>
+<div id="tutorial" class="modal"><div class="modalbox tutorialbox">
+<button class="x" id="closeTutorial">×</button><div class="eyebrow">ОБУЧЕНИЕ НОВИЧКА</div>
+<h2 id="tutorialTitle">1. ЦЕЛЬ ИГРЫ</h2><div class="tutorialVisual" id="tutorialVisual">◎</div>
+<p id="tutorialText"></p>
+<div class="tutorialNav"><button id="tutorialPrevArrow" class="tutArrow">←</button>
+<div class="tutorialSteps"><i class="on"></i><i></i><i></i><i></i></div>
+<button id="tutorialNextArrow" class="tutArrow">→</button></div>
+<button id="tutorialNext" class="primary">ДАЛЬШЕ →</button>
+</div></div>
+<div id="authModal" class="modal"><div class="modalbox authbox"><button class="x" id="closeAuth">×</button><div class="eyebrow">ASYQ ID</div><h2>СОХРАНИ ПРОГРЕСС</h2><p>В демо-режиме профиль сохраняется на этом устройстве. Подключи Supabase по инструкции в README — и вход/прогресс будут работать между устройствами.</p><input id="authName" maxlength="16" placeholder="Никнейм"><input id="authEmail" type="email" placeholder="Email (для облачного режима)"><button id="localLogin" class="primary">ВОЙТИ В DEMO-ПРОФИЛЬ</button><small>Пароль и настоящая облачная авторизация включаются после настройки Supabase.</small></div></div>
+
+<div id="missionModal" class="modal"><div class="modalbox missionbox"><div class="missionIcon">🎯</div><div class="eyebrow">СЛУЧАЙНОЕ ИСПЫТАНИЕ МАТЧА</div><h2 id="missionTitle">ЦЕПНАЯ РЕАКЦИЯ</h2><p id="missionText">Сделай настоящий рикошет.</p><div class="missionWarning"><b>🚫 КРАСНЫЙ АСЫҚ — ЗАПРЕТНАЯ ЦЕЛЬ</b><span>Не выбивай его за границу круга: он не приносит очко и может сорвать специальное задание.</span></div><b id="missionReward" class="missionReward">+70 XP за выполнение</b><button id="missionGo" class="primary">ПРИНЯТЬ ВЫЗОВ →</button></div></div>
+<div id="toast"></div><footer><b>ASYQ ARENA</b><span>Смотри, теперь в асық можно сыграть и так.</span><small>2026 • учебный digital-проект</small></footer></div><script src="supabase-config.js"></script><script src="game.js"></script><script>document.getElementById("missionGo").onclick=()=>document.getElementById("missionModal").classList.remove("show");</script></body></html>
